@@ -49,7 +49,7 @@ class MusicController extends Controller
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
             'status_id' => 'required|exists:statuses,id',
-            'file' => 'required|file|mimes:mp3,wav,ogg,flac|max:20480', // Max 20MB
+            'file' => 'required|file|mimes:mp3,wav,ogg,flac|max:' . (20 * 1024), // Max 20MB
             'duration' => 'nullable|integer'
         ]);
         

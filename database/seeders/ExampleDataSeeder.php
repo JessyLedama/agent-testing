@@ -40,6 +40,8 @@ class ExampleDataSeeder extends Seeder
         $publishedStatus = \App\Models\Status::where('name', 'published')->first();
 
         // Create published music from artist 1
+        // Note: In the seeder, we manually add music to playlist.
+        // In normal operation via API, this happens automatically in MusicController.
         $music1 = \App\Models\Music::create([
             'title' => 'Summer Vibes',
             'artist_id' => $artist1->id,
