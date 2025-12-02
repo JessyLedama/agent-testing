@@ -66,6 +66,48 @@ class User extends Authenticatable
     }
 
     /**
+     * Get user's created playlists.
+     */
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class);
+    }
+
+    /**
+     * Get the artists this user is following.
+     */
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'artist_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get the users following this artist.
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'artist_id', 'follower_id')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get user's likes.
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * Get user's comments.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Check if user is an artist.
      */
     public function isArtist(): bool
