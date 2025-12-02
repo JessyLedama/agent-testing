@@ -50,6 +50,63 @@ class Music extends Model
     }
 
     /**
+     * Get playlists that contain this music.
+     */
+    public function playlists(): BelongsToMany
+    {
+        return $this->belongsToMany(Playlist::class, 'playlist_music')
+            ->withTimestamps();
+    }
+
+    /**
+     * Get likes for this music.
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * Get views for this music.
+     */
+    public function views()
+    {
+        return $this->hasMany(\App\Models\View::class);
+    }
+
+    /**
+     * Get comments for this music.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Get the count of likes for this music.
+     */
+    public function likesCount()
+    {
+        return $this->likes()->where('is_like', true)->count();
+    }
+
+    /**
+     * Get the count of views for this music.
+     */
+    public function viewsCount()
+    {
+        return $this->views()->count();
+    }
+
+    /**
+     * Get the count of comments for this music.
+     */
+    public function commentsCount()
+    {
+        return $this->comments()->count();
+    }
+
+    /**
      * Scope to only get published music.
      */
     public function scopePublished($query)
