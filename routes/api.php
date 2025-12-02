@@ -18,4 +18,8 @@ Route::post('/user/become-artist', [UserController::class, 'becomeArtist'])
 Route::apiResource('categories', CategoryController::class);
 
 // Music routes
-Route::apiResource('music', MusicController::class);
+Route::get('/music', [MusicController::class, 'index']);
+Route::get('/music/{music}', [MusicController::class, 'show']);
+Route::post('/music', [MusicController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/music/{music}', [MusicController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/music/{music}', [MusicController::class, 'destroy'])->middleware('auth:sanctum');
